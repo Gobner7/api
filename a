@@ -151,7 +151,18 @@ elseif GameId == 142553158 then -- Assassin
                 third = (gsub(third, space .. T1Exotics, emptystring));
                 third = (gsub(third, not_numbers, emptystring));
 
-                Values[first] = tonumber(third); --first is knife, third is value
+                Values[first] = {
+                    Value = tonumber(third),
+                    Demand = tonumber(ltrs[4]),
+                    Rarity = tonumber(ltrs[5]),
+                    Dreams = tonumber(ltrs[6]),
+                    Mythics = tonumber(ltrs[7]),
+                    Exotics = tonumber(ltrs[8]),
+                    Legendarys = tonumber(ltrs[9]),
+                    Rares = tonumber(ltrs[10]),
+                    Commons = tonumber(ltrs[11]),
+                    Pets = tonumber(ltrs[12])
+                }; --first is knife, third is value
             end;
         end;
 
@@ -186,7 +197,7 @@ function Api.calculate(self, items)
 
         local value = self.Values[Item];
         if value then
-            Value += (value * Amount);
+            Value += (value.Value * Amount);
         else
             warn("Item '" .. Item .. "' was not found in values.");
         end;
